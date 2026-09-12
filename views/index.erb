@@ -1,0 +1,47 @@
+<h1>Todo</h1>
+
+<form method="post" action="/todos" class="add">
+  <input name="title" placeholder="Nouvelle tâche…" autofocus autocomplete="off" required />
+  <button>Ajouter</button>
+</form>
+
+<nav class="filters" aria-label="Filtre">
+  <a href="/" class="<%= 'is-active' if @filter == 'all' %>">Toutes</a>
+  <a href="/?filter=active" class="<%= 'is-active' if @filter == 'active' %>">À faire</a>
+  <a href="/?filter=done" class="<%= 'is-active' if @filter == 'done' %>">Faites</a>
+</nav>
+
+<% if @todos.empty? %>
+  <p class="empty">Rien ici.</p>
+<% else %>
+  <ul class="todos">
+    <% @todos.each do |todo| %>
+      <li class="<%= 'is-done' if todo[:done] %>">
+        <form method="post" action="/todos/<%= todo[:id] %>/toggle">
+          <input type="hidden" name="filter" value="<%= @filter %>" />
+          <button class="check" aria-label="<%= todo[:done] ? 'Marquer à faire' : 'Marquer faite' %>">
+            <%= todo[:done] ? "☑" : "☐" %>
+          </button>
+        </form>
+        <span class="title"><%= Rack::Utils.escape_html(todo[:title]) %></span>
+        <form method="post" action="/todos/<%= todo[:id] %>/delete">
+          <input type="hidden" name="filter" value="<%= @filter %>" />
+          <button class="delete" aria-label="Supprimer">×</button>
+        </form>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<footer>
+  <span><%= @remaining %> à faire</span>
+  <form method="post" action="/todos/clear-done">
+    <input type="hidden" name="filter" value="<%= @filter %>" />
+    <button class="link">Effacer les faites</button>
+  </form>
+</footer>
+
+<p class="meta">
+  Page générée par le serveur à <%= @rendered_at.strftime("%H:%M:%S") %>.
+  Chaque clic renvoie une requête et recharge la page.
+</p>

@@ -52,4 +52,4 @@ Aucune authentification : tout le monde voit et modifie la même liste.
 
 ## Licence
 
-MIT.
+Domaine public ([Unlicense](https://unlicense.org)).

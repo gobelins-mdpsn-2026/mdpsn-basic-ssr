@@ -6,7 +6,8 @@ services:
     expose:
       - "3000"
     environment:
-      - DATABASE_URL=postgres://todo:todo@db:5432/todo
+      # SERVICE_NAME_DB is set by Coolify; in PR previews the service is renamed db-pr-N.
+      - DATABASE_URL=postgres://todo:todo@${SERVICE_NAME_DB:-db}:5432/todo
     depends_on:
       db:
         condition: service_healthy

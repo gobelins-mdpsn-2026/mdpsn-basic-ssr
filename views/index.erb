@@ -34,7 +34,7 @@
 <% end %>
 
 <footer>
-  <span><%= @remaining %> à faire</span>
+  <span><%= @remaining %> à faire (Vas-y, bébé !)</span>
   <form method="post" action="/todos/clear-done">
     <input type="hidden" name="filter" value="<%= @filter %>" />
     <button class="link">Effacer les faites</button>

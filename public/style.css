@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light blue;
   font-family: "Comic Sans MS", system-ui, sans-serif;
   --muted: color-mix(in srgb, CanvasText 50%, Canvas);
   --line: color-mix(in srgb, CanvasText 15%, Canvas);
